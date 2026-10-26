@@ -22,7 +22,7 @@ A payment-processing platform (bank back-office style): accounts, payments, batc
 - Angular dashboard for payments and statuses
 
 ## Built so far
-- Repository set up (more coming each week)
+- Clean Architecture solution on .NET 10 (Domain, Application, Infrastructure, Api, UnitTests); builds, tests and runs
 
 ## How it's built
 This is a portfolio and learning project. AI tools (GitHub Copilot and Claude) help me with planning and code review; I write, run and test the code myself.
