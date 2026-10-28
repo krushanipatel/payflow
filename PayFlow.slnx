@@ -6,6 +6,7 @@
     <Project Path="src/PayFlow.Infrastructure/PayFlow.Infrastructure.csproj" />
   </Folder>
   <Folder Name="/tests/">
+    <Project Path="tests/PayFlow.Api.Tests/PayFlow.Api.Tests.csproj" />
     <Project Path="tests/PayFlow.UnitTests/PayFlow.UnitTests.csproj" />
   </Folder>
 </Solution>

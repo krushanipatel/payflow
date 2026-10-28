@@ -9,9 +9,20 @@ My build log for PayFlow. I update it at the end of every session.
   will use the same version later. Everything builds, the template test passes, and the API answers
   on /weatherforecast.
 
+- **Oct 28:** Built the first real feature: no duplicate payments.
+  - Domain: `Payment` with an idempotency key and rules (amount must be more than 0, can't pay
+    the same account, 3-letter currency). Completing a payment writes two ledger lines, one debit
+    and one credit, for the same amount (double-entry).
+  - API: `POST /payments` and `GET /payments/{id}`. If the same `Idempotency-Key` comes twice,
+    the first call gets 201 Created and the retry gets 200 OK with the same payment. Storage is
+    in memory for now, behind an `IPaymentRepository` interface.
+  - Tests: 8 xUnit unit tests for the Domain rules and 3 integration tests with
+    WebApplicationFactory. All 11 pass.
+  
+
 ## Next step
-- Add the first real code: Account and Payment in the Domain project, with a few basic rules
-  (for example, amount must be more than 0), and my first real unit tests.
+- Day 4: EF Core + SQL Server in Docker. Swap the in-memory repository for a real one, with a
+  unique index on IdempotencyKey.
 
 ## Blockers
 - Nothing right now.
