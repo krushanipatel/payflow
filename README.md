@@ -54,7 +54,17 @@ I'm building one thin slice that works end to end first, then adding layers.
 - **DevOps:** Docker, GitHub Actions CI/CD, Bicep, Azure Container Apps (live demo), Kubernetes (AKS)
 
 ## Built so far
-- Clean Architecture solution on .NET 10 (Domain, Application, Infrastructure, Api, UnitTests); builds, tests and runs
+- Clean Architecture solution on .NET 10 (Domain, Application, Infrastructure, Api, tests)
+- `POST /payments` with an `Idempotency-Key` header: the same payment sent twice is saved once
+  (201 Created the first time, 200 OK with the same payment on a retry). `GET /payments/{id}` too.
+- Double-entry ledger in the Domain: completing a payment writes one debit and one credit line
+- Payment rules in the Domain: amount above 0, different accounts, 3-letter currency
+- 11 automated tests: 8 xUnit unit tests + 3 API integration tests with WebApplicationFactory
+- Storage is in memory for now; SQL Server with EF Core is next
 
+## Run it
+    dotnet test                              # 11 tests
+    dotnet run --project src/PayFlow.Api     # API on http://localhost:5201
+    
 ## How it's built
 This is a portfolio and learning project. AI tools (GitHub Copilot and Claude) help me with planning and code review; I write, run and test the code myself.
